@@ -1,3 +1,4 @@
+import DashboardLayout from "@/components/DashboardLayout";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader2, Trophy, Star, Zap, Award } from "lucide-react";
@@ -23,6 +24,7 @@ export default function Gamification() {
   }
 
   return (
+    <DashboardLayout>
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-4 md:p-8">
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
@@ -191,5 +193,7 @@ export default function Gamification() {
         </Card>
       </div>
     </div>
+    </DashboardLayout>
   );
 }
+

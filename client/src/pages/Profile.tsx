@@ -1,3 +1,4 @@
+import DashboardLayout from "@/components/DashboardLayout";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -71,6 +72,7 @@ export default function Profile() {
   }
 
   return (
+    <DashboardLayout>
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-4 md:p-8">
       <div className="container mx-auto max-w-2xl">
         {/* Header */}
@@ -243,5 +245,7 @@ export default function Profile() {
         </Card>
       </div>
     </div>
+    </DashboardLayout>
   );
 }
+
