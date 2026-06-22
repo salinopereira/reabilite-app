@@ -1,15 +1,11 @@
 import { int, mysqlEnum, mysqlTable, text, timestamp, varchar, decimal, date, boolean, json } from "drizzle-orm/mysql-core";
 
-/**
- * Core user table backing auth flow.
- * Extend this file with additional tables as your product grows.
- * Columns use camelCase to match both database fields and generated types.
- */
 export const users = mysqlTable("users", {
   id: int("id").autoincrement().primaryKey(),
   openId: varchar("openId", { length: 64 }).notNull().unique(),
   name: text("name"),
   email: varchar("email", { length: 320 }),
+  passwordHash: text("passwordHash"),
   loginMethod: varchar("loginMethod", { length: 64 }),
   role: mysqlEnum("role", ["user", "admin", "patient", "professional"]).default("user").notNull(),
   userType: mysqlEnum("userType", ["patient", "professional", "admin"]).notNull(),
@@ -23,7 +19,6 @@ export const users = mysqlTable("users", {
 export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 
-// Perfil de Usuário
 export const userProfiles = mysqlTable("user_profiles", {
   id: int("id").autoincrement().primaryKey(),
   userId: int("userId").notNull(),
@@ -42,7 +37,6 @@ export const userProfiles = mysqlTable("user_profiles", {
 export type UserProfile = typeof userProfiles.$inferSelect;
 export type InsertUserProfile = typeof userProfiles.$inferInsert;
 
-// ReabiCheck - Check-in Diário
 export const reabiCheckins = mysqlTable("reabi_checkins", {
   id: int("id").autoincrement().primaryKey(),
   userId: int("userId").notNull(),
@@ -56,7 +50,6 @@ export const reabiCheckins = mysqlTable("reabi_checkins", {
 export type ReabiCheckin = typeof reabiCheckins.$inferSelect;
 export type InsertReabiCheckin = typeof reabiCheckins.$inferInsert;
 
-// Evolução Corporal
 export const bodyEvolution = mysqlTable("body_evolution", {
   id: int("id").autoincrement().primaryKey(),
   userId: int("userId").notNull(),
@@ -75,7 +68,6 @@ export const bodyEvolution = mysqlTable("body_evolution", {
 export type BodyEvolution = typeof bodyEvolution.$inferSelect;
 export type InsertBodyEvolution = typeof bodyEvolution.$inferInsert;
 
-// Treinos
 export const workouts = mysqlTable("workouts", {
   id: int("id").autoincrement().primaryKey(),
   userId: int("userId").notNull(),
@@ -94,7 +86,6 @@ export const workouts = mysqlTable("workouts", {
 export type Workout = typeof workouts.$inferSelect;
 export type InsertWorkout = typeof workouts.$inferInsert;
 
-// Hábitos Diários
 export const dailyHabits = mysqlTable("daily_habits", {
   id: int("id").autoincrement().primaryKey(),
   userId: int("userId").notNull(),
@@ -111,7 +102,6 @@ export const dailyHabits = mysqlTable("daily_habits", {
 export type DailyHabit = typeof dailyHabits.$inferSelect;
 export type InsertDailyHabit = typeof dailyHabits.$inferInsert;
 
-// Gamificação - Medalhas
 export const badges = mysqlTable("badges", {
   id: int("id").autoincrement().primaryKey(),
   userId: int("userId").notNull(),
@@ -123,7 +113,6 @@ export const badges = mysqlTable("badges", {
 export type Badge = typeof badges.$inferSelect;
 export type InsertBadge = typeof badges.$inferInsert;
 
-// Gamificação - Pontos e XP
 export const userGamification = mysqlTable("user_gamification", {
   id: int("id").autoincrement().primaryKey(),
   userId: int("userId").notNull().unique(),
@@ -139,7 +128,6 @@ export const userGamification = mysqlTable("user_gamification", {
 export type UserGamification = typeof userGamification.$inferSelect;
 export type InsertUserGamification = typeof userGamification.$inferInsert;
 
-// Feed Social
 export const socialPosts = mysqlTable("social_posts", {
   id: int("id").autoincrement().primaryKey(),
   userId: int("userId").notNull(),
@@ -152,7 +140,6 @@ export const socialPosts = mysqlTable("social_posts", {
 export type SocialPost = typeof socialPosts.$inferSelect;
 export type InsertSocialPost = typeof socialPosts.$inferInsert;
 
-// Desafios
 export const challenges = mysqlTable("challenges", {
   id: int("id").autoincrement().primaryKey(),
   challengeName: text("challengeName").notNull(),
@@ -165,7 +152,6 @@ export const challenges = mysqlTable("challenges", {
 export type Challenge = typeof challenges.$inferSelect;
 export type InsertChallenge = typeof challenges.$inferInsert;
 
-// Participação em Desafios
 export const challengeParticipants = mysqlTable("challenge_participants", {
   id: int("id").autoincrement().primaryKey(),
   challengeId: int("challengeId").notNull(),
@@ -178,7 +164,6 @@ export const challengeParticipants = mysqlTable("challenge_participants", {
 export type ChallengeParticipant = typeof challengeParticipants.$inferSelect;
 export type InsertChallengeParticipant = typeof challengeParticipants.$inferInsert;
 
-// Nutrição
 export const nutritionRecords = mysqlTable("nutrition_records", {
   id: int("id").autoincrement().primaryKey(),
   userId: int("userId").notNull(),
@@ -193,7 +178,6 @@ export const nutritionRecords = mysqlTable("nutrition_records", {
 export type NutritionRecord = typeof nutritionRecords.$inferSelect;
 export type InsertNutritionRecord = typeof nutritionRecords.$inferInsert;
 
-// Saúde Mental
 export const mentalHealthRecords = mysqlTable("mental_health_records", {
   id: int("id").autoincrement().primaryKey(),
   userId: int("userId").notNull(),
@@ -209,7 +193,6 @@ export const mentalHealthRecords = mysqlTable("mental_health_records", {
 export type MentalHealthRecord = typeof mentalHealthRecords.$inferSelect;
 export type InsertMentalHealthRecord = typeof mentalHealthRecords.$inferInsert;
 
-// Missões
 export const missions = mysqlTable("missions", {
   id: int("id").autoincrement().primaryKey(),
   userId: int("userId").notNull(),

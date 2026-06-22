@@ -15,6 +15,13 @@
       "when": 1782095350847,
       "tag": "0001_milky_norman_osborn",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1782107139102,
+      "tag": "0002_fluffy_karma",
+      "breakpoints": true
     }
   ]
 }

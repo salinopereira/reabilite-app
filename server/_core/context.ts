@@ -1,28 +1,34 @@
-import type { CreateExpressContextOptions } from "@trpc/server/adapters/express";
+// context.ts — sem dependência do Manus SDK
+import type { Request, Response } from "express";
+import * as db from "../db";
+import { verifySessionToken } from "./auth";
+import { COOKIE_NAME } from "@shared/const";
+import { parse as parseCookies } from "cookie";
 import type { User } from "../../drizzle/schema";
-import { sdk } from "./sdk";
 
-export type TrpcContext = {
-  req: CreateExpressContextOptions["req"];
-  res: CreateExpressContextOptions["res"];
+export type Context = {
+  req: Request;
+  res: Response;
   user: User | null;
 };
 
-export async function createContext(
-  opts: CreateExpressContextOptions
-): Promise<TrpcContext> {
+export async function createContext({ req, res }: { req: Request; res: Response }): Promise<Context> {
+  const raw = req.headers.cookie ?? "";
+  const cookies = parseCookies(raw);
+  const token = cookies[COOKIE_NAME];
+
   let user: User | null = null;
 
-  try {
-    user = await sdk.authenticateRequest(opts.req);
-  } catch (error) {
-    // Authentication is optional for public procedures.
-    user = null;
+  if (token) {
+    try {
+      const session = await verifySessionToken(token);
+      if (session) {
+        user = (await db.getUserByOpenId(session.openId)) ?? null;
+      }
+    } catch {
+      // token inválido — user permanece null
+    }
   }
 
-  return {
-    req: opts.req,
-    res: opts.res,
-    user,
-  };
+  return { req, res, user };
 }

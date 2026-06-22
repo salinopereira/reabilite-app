@@ -1,0 +1,40 @@
+{
+  "build_command": "pnpm run build",
+  "capabilities": [
+    "server",
+    "db",
+    "user"
+  ],
+  "dev_command": "pnpm run dev",
+  "env_vars": {
+    "DATABASE_URL": "mysql://39w9pDtWhsrvnQe.29fad71adb06:4f496o8HCyKTw2FMyVnH@gateway03.us-east-1.prod.aws.tidbcloud.com:4000/FqaYgL8eEestRGNUgSnj92?ssl={\"rejectUnauthorized\":true}"
+  },
+  "experiments": null,
+  "git_remote": {
+    "repo_url": "https://7f0548f6b28a1758d9bf7be630d36cb4.artifacts.cloudflare.net/git/prod/FqaYgL8eEestRGNUgSnj92.git",
+    "expiration": "2026-06-23T02:21:01.314Z",
+    "token": "art_v1_8a2dce3d882b9fecf9c05c1a64bbf308ba7a4dd3?expires=1782181261",
+    "backend": "GIT_BACKEND_ARTIFACTS"
+  },
+  "name": "reabilite-app",
+  "path": "/home/ubuntu/reabilite-app",
+  "port": 3000,
+  "secrets": {
+    "BUILT_IN_FORGE_API_KEY": "NUUZVKUXYDzFKVfNMDh8QK",
+    "BUILT_IN_FORGE_API_URL": "https://forge.manus.ai",
+    "JWT_SECRET": "7cEnbeMp9xmqA4eVijSGxQ",
+    "OAUTH_SERVER_URL": "https://api.manus.im",
+    "OWNER_NAME": "Luan Pereira",
+    "OWNER_OPEN_ID": "hMg9KoWimJSa5kqhkrGJwq",
+    "VITE_ANALYTICS_ENDPOINT": "https://manus-analytics.com",
+    "VITE_ANALYTICS_WEBSITE_ID": "43985cd4-02c5-47dd-a9ac-fa909377955d",
+    "VITE_APP_ID": "FqaYgL8eEestRGNUgSnj92",
+    "VITE_APP_LOGO": "",
+    "VITE_APP_TITLE": "REABILITE APP - Plataforma de Saúde Integrativa",
+    "VITE_FRONTEND_FORGE_API_KEY": "Furm3LaBW37oYvEpeqvY8B",
+    "VITE_FRONTEND_FORGE_API_URL": "https://forge.manus.ai",
+    "VITE_OAUTH_PORTAL_URL": "https://manus.im"
+  },
+  "template_id": "web-db-user",
+  "test_command": "pnpm test"
+}
