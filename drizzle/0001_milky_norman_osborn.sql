@@ -3,7 +3,7 @@ CREATE TABLE `badges` (
 	`userId` int NOT NULL,
 	`badgeName` text NOT NULL,
 	`badgeType` enum('7workouts','30workouts','50workouts','100workouts','200workouts','500workouts','special') NOT NULL,
-	`unlockedAt` timestamp NOT NULL DEFAULT (now()),
+	`unlockedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	CONSTRAINT `badges_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
@@ -19,7 +19,7 @@ CREATE TABLE `body_evolution` (
 	`chestCircumference` decimal(5,2),
 	`armCircumference` decimal(5,2),
 	`photoUrl` text,
-	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`createdAt` datetime NOT NULL DEFAULT '2000-01-01 00:00:00',
 	CONSTRAINT `body_evolution_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
@@ -29,7 +29,7 @@ CREATE TABLE `challenge_participants` (
 	`userId` int NOT NULL,
 	`progress` int DEFAULT 0,
 	`completed` boolean DEFAULT false,
-	`joinedAt` timestamp NOT NULL DEFAULT (now()),
+	`joinedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	CONSTRAINT `challenge_participants_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
@@ -39,7 +39,7 @@ CREATE TABLE `challenges` (
 	`challengeType` enum('21days','30days','weightloss','hypertrophy','steps','team') NOT NULL,
 	`startDate` date NOT NULL,
 	`endDate` date NOT NULL,
-	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`createdAt` datetime NOT NULL DEFAULT '2000-01-01 00:00:00',
 	CONSTRAINT `challenges_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
@@ -53,7 +53,7 @@ CREATE TABLE `daily_habits` (
 	`energy` int,
 	`muscleSoreness` int,
 	`steps` int,
-	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`createdAt` datetime NOT NULL DEFAULT '2000-01-01 00:00:00',
 	CONSTRAINT `daily_habits_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
@@ -66,7 +66,7 @@ CREATE TABLE `mental_health_records` (
 	`stress` int,
 	`sleepQuality` int,
 	`notes` text,
-	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`createdAt` datetime NOT NULL DEFAULT '2000-01-01 00:00:00',
 	CONSTRAINT `mental_health_records_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
@@ -79,7 +79,7 @@ CREATE TABLE `missions` (
 	`progress` int DEFAULT 0,
 	`completed` boolean DEFAULT false,
 	`completedAt` timestamp,
-	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`createdAt` datetime NOT NULL DEFAULT '2000-01-01 00:00:00',
 	CONSTRAINT `missions_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
@@ -91,7 +91,7 @@ CREATE TABLE `nutrition_records` (
 	`description` text,
 	`photoUrl` text,
 	`waterIntake` int,
-	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`createdAt` datetime NOT NULL DEFAULT '2000-01-01 00:00:00',
 	CONSTRAINT `nutrition_records_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
@@ -99,10 +99,10 @@ CREATE TABLE `reabi_checkins` (
 	`id` int AUTO_INCREMENT NOT NULL,
 	`userId` int NOT NULL,
 	`checkinDate` date NOT NULL,
-	`checkinTime` timestamp NOT NULL DEFAULT (now()),
+	`checkinTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`photoUrl` text,
 	`notes` text,
-	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`createdAt` datetime NOT NULL DEFAULT '2000-01-01 00:00:00',
 	CONSTRAINT `reabi_checkins_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
@@ -112,7 +112,7 @@ CREATE TABLE `social_posts` (
 	`content` text,
 	`postType` enum('checkin','achievement','progress','general') NOT NULL,
 	`likes` int DEFAULT 0,
-	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`createdAt` datetime NOT NULL DEFAULT '2000-01-01 00:00:00',
 	CONSTRAINT `social_posts_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
@@ -125,7 +125,7 @@ CREATE TABLE `user_gamification` (
 	`currentStreak` int DEFAULT 0,
 	`bestStreak` int DEFAULT 0,
 	`totalWorkouts` int DEFAULT 0,
-	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	`updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	CONSTRAINT `user_gamification_id` PRIMARY KEY(`id`),
 	CONSTRAINT `user_gamification_userId_unique` UNIQUE(`userId`)
 );
@@ -141,8 +141,8 @@ CREATE TABLE `user_profiles` (
 	`age` int,
 	`gender` enum('male','female','other'),
 	`observations` text,
-	`createdAt` timestamp NOT NULL DEFAULT (now()),
-	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	`createdAt` datetime NOT NULL DEFAULT '2000-01-01 00:00:00',
+	`updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	CONSTRAINT `user_profiles_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
@@ -158,7 +158,7 @@ CREATE TABLE `workouts` (
 	`restTime` int,
 	`videoUrl` text,
 	`notes` text,
-	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`createdAt` datetime NOT NULL DEFAULT '2000-01-01 00:00:00',
 	CONSTRAINT `workouts_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
